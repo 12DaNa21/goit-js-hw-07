@@ -4,42 +4,37 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 document.body.style.backgroundColor = '#F6F6FE';
+document.addEventListener('DOMContentLoaded', function() {
+      const createButton = document.querySelector('[data-create]');
+      const destroyButton = document.querySelector('[data-destroy]');
 
-const controls = document.querySelector('controls');
-const inputNumberEl = document.querySelector('[type="number"]');
-const createBtnEl = document.querySelector('button[data-create]');
-const destroyBtnEl = document.querySelector('button[data-destroy]');
-const divBoxesEl = document.getElementById('boxes');
-divBoxesEl.style.display = 'flex';
-divBoxesEl.style.flexWrap = 'wrap';
-divBoxesEl.style.alignItems = 'center';
-divBoxesEl.style.marginTop = '30px';
-inputNumberEl.addEventListener('input', toogleValue);
-createBtnEl.addEventListener('click', () => {
-  createBoxes(Number(inputNumberEl.value));
-});
+      createButton.addEventListener('click', createBoxes);
+      destroyButton.addEventListener('click', destroyBoxes);
+    });
 
+    function createBoxes() {
+      const input = document.querySelector('input');
+      const boxContainer = document.getElementById('boxes');
+      boxContainer.innerHTML = '';
+      const boxCount = parseInt(input.value);
+      if (isNaN(boxCount) || boxCount < 1 || boxCount > 100) {
+        alert('Please enter a number between 1 and 100.');
+        return;
+      }
+      let size = 30;
+      for (let i = 0; i < boxCount; i++) {
+        const box = document.createElement('div');
+        box.style.width = `${size}px`;
+        box.style.height = `${size}px`;
+        box.style.backgroundColor = getRandomHexColor();
+        boxContainer.appendChild(box);
+        size += 10;
+      }
+      input.value = '';
+    }
 
-let inputValue = 0;
-function toogleValue(event) {
-  inputValue = event.currentTarget.value;
-  console.log(inputValue);
-}
-
-function createBoxes(amount) {
-  let size = 30;
-  const boxesArr = [];
-  for (let i = 0; i < amount; i += 1) {
-    size += 10 * i;
-    const div = `<div class="item" style="display: block; margin-right: 30px; margin-bottom: 30px; background-color: ${getRandomHexColor()}; width: ${size}px; height: ${size}px;"></div>`;
-    boxesArr.push(div);
-  }
-  divBoxesEl.insertAdjacentHTML('beforeend', boxesArr.join(''));
-}
-
-destroyBtnEl.addEventListener('click', destroyBoxes);
-
-function destroyBoxes() {
-  inputNumberEl.value = '';
-  divBoxesEl.innerHTML = '';
-}
+    function destroyBoxes() {
+      const boxContainer = document.getElementById('boxes');
+      
+      boxContainer.innerHTML = '';
+    }
