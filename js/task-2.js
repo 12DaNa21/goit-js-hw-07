@@ -29,7 +29,7 @@ const images = [
 ];
 const gallery = document.querySelector('.gallery');
 const renderGallery = ({ url, alt }) =>
-  `<li><img src="${url}" alt="${alt}" width = "200" height = "auto"></li>`;
+  `<li><img src="${url}" alt="${alt}" width = "360" height = "300"></li>`;
 
 const galleryMarkup = images.map(renderGallery).join('');
 gallery.insertAdjacentHTML('beforeend', galleryMarkup);

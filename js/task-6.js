@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function createBoxes() {
       const input = document.querySelector('input');
-      const boxContainer = document.getElementById('boxes');
-      boxContainer.innerHTML = '';
+      const boxes= document.getElementById('boxes');
+      boxes.innerHTML = '';
       const boxCount = parseInt(input.value);
       if (isNaN(boxCount) || boxCount < 1 || boxCount > 100) {
         alert('Please enter a number between 1 and 100.');
@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
         box.style.width = `${size}px`;
         box.style.height = `${size}px`;
         box.style.backgroundColor = getRandomHexColor();
-        boxContainer.appendChild(box);
+        boxes.appendChild(box);
         size += 10;
       }
       input.value = '';
     }
 
     function destroyBoxes() {
-      const boxContainer = document.getElementById('boxes');
+      const boxes = document.getElementById('boxes');
       
-      boxContainer.innerHTML = '';
+      boxes.innerHTML = '';
     }
